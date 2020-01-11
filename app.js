@@ -1,12 +1,19 @@
 const userContainer =document.querySelector('#user-info');
-console.log(userContainer);
+const noteForm = document.querySelector('form');
 
 const API = 'https://acme-users-api-rev.herokuapp.com/api';
 
-const noteButton= document.querySelector('#createNote');
-noteButton.addEventListener('click', (ev) => {
+
+noteForm.addEventListener('submit', (ev) => {
     ev.preventDefault();
-    console.log(ev.target.previousElementSibling.value)
+    const text = document.querySelector("input")
+    console.log(text.value)
+
+    const note = {
+        text: text.value
+    }
+    
+   postNotes(window.localStorage.userId,note);
 })
 
 const getNewUser = () => {
@@ -42,11 +49,13 @@ const loadUser = (user) => {
     const html = `<h2>${user.fullName}</h2>
                     <img class = 'avatar' src = ${user.avatar}>
                     <p>${user.bio}</p>`;
-
     card.innerHTML = html;
 }
+
 const postNotes = async (id, note) => {
-    const res = axios.post(`${API}/users/${id}/notes`);
+    const res = await axios.post(`${API}/users/${id}/notes`, note);
+    const created = res.data;
+    console.log(created);
 }
 
 const getNotes = async (id) => {
@@ -56,13 +65,15 @@ const getNotes = async (id) => {
     
     if(notes) {
         console.log(notes);
-        let html = `<h2> Notes (${notes.length}) </h2>`;
-        html = html + notes.map( note => {
-            return `<div class = 'note'> 
+        
+        let html = notes.map( note => {
+            return `<li> 
                     <p>${note.text}</p>
-                    <button>X</button>
-                    </div>`
+                    <button>Delete Note</button>
+                    </li>`
         }).join('');
+        html = `<h2> Notes (${notes.length}) </h2>` + `<ul>${html}</ul>`;
+
         noteCard.innerHTML = html;
 
     }
