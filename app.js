@@ -3,6 +3,12 @@ console.log(userContainer);
 
 const API = 'https://acme-users-api-rev.herokuapp.com/api';
 
+const noteButton= document.querySelector('#createNote');
+noteButton.addEventListener('click', (ev) => {
+    ev.preventDefault();
+    console.log(ev.target.previousElementSibling.value)
+})
+
 const getNewUser = () => {
     const newUserButton = document.querySelector('#newUser');
     newUserButton.addEventListener('click',() => {

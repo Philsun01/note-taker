@@ -11,13 +11,15 @@ h1 {
 
 main > * {
     flex: 1;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     border-style: solid;
     padding: 1rem;
-    margin: 1rem;
-    
+    margin: 1rem;   
+}
+
+form {
+    display: flex;
+    flex-direction: column;
 }
 
 main {
@@ -28,16 +30,19 @@ main {
 .note {
     background-color: lightgreen;
     margin: 1rem;
-    padding: 1rem;
+    padding: 0.5rem;
     border-radius: 0.25rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 50%;
-    
 }
 
 .note > button {
     width: 50%;
     padding: 0.5rem;
+}
+
+input, button {
+    height: 3rem;
 }
