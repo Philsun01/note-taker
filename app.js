@@ -20,9 +20,23 @@ const fetchUser = async ()=> {
   return  user;
 };
 
+const loadUser = (user) => {
+    const card = document.querySelector("#user-info");
+    console.log(card);
+    console.log(user.fullName);
+    console.log(user.bio);
+
+    const html = `<h2>${user.fullName}</h2>
+                    <img class = 'avatar' src = "chewbacca.jpeg">
+                    <p>${user.bio}</p>`;
+
+    card.innerHTML = html;
+}
+
 const startApp = async() => {
     const user = await fetchUser();
-    console.log(user);
+    
+    loadUser(user);
 }
 
 startApp();
