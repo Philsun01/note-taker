@@ -7,6 +7,7 @@ const getNewUser = () => {
     const newUserButton = document.querySelector('#newUser');
     newUserButton.addEventListener('click',() => {
         window.localStorage.removeItem('userId');
+        console.log(window.localStorage);
         startApp();
     })
 }
@@ -66,6 +67,7 @@ const startApp = async() => {
     const user = await fetchUser();
     loadUser(user);
     getNotes(user.id);
+    getNewUser();
 }
 
 startApp();
